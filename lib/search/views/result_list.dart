@@ -24,10 +24,9 @@ class ResultListView extends StatelessWidget {
                   Text(text),
                 ],
               ),
-              LoadedState(results: List<SearchResultDTO> results) => ListView.separated(
+              LoadedState(results: List<SearchResultDTO> results) => ListView.builder(
                   shrinkWrap: true,
                   itemCount: results.length,
-                  separatorBuilder: (BuildContext context, int index) => const SizedBox(),
                   itemBuilder: (BuildContext context, int index) {
                     var item = results[index];
                     return Padding(
