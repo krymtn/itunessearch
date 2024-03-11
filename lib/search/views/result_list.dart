@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:itunessearchbloc/search/models/search_result_dto.dart';
 import '../cubit/search_results_cubit.dart';
 
-class ResultListView extends StatelessWidget {
-  const ResultListView({super.key});
+class ResultList extends StatelessWidget {
+  const ResultList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    context.read<SearchResultCubit>().fetchResultsBy(queryText: "jack+johnson");
     return Scaffold(
       body: Center(
         child: BlocBuilder<SearchResultCubit, SearchResultsState>(

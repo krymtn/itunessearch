@@ -9,6 +9,7 @@ class ItunesInterceptor implements Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    print(options.uri);
     handler.next(options);
   }
 
