@@ -9,4 +9,16 @@ class Collection extends Result {
     required super.artistId,
     required super.artistName,
     required super.wrapperType});
+
+  @override
+  String? get searchValue => collectionName;
+
+  factory Collection.fromJson(Map<String, dynamic> data) {
+    return Collection(
+        wrapperType: data["wrapperType"],
+        artistId: data["artistId"],
+        artistName: data["artistName"],
+        collectionName: data["collectionName"],
+        artworkUrl60: data["artworkUrl60"]);
+  }
 }

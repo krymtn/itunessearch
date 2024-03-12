@@ -14,14 +14,7 @@ class SearchView extends BaseStatefulWidget {
 
 class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStatefulWidgetMixin{
   final TextEditingController controller = TextEditingController();
-  final debouncer = Debouncer(milliseconds: 750);
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<SearchResultCubit>().fetchResultsBy(queryText: "jack+johnson");
-    });
-  }
+  final debouncer = Debouncer(milliseconds: 500);
 
   @override
   void dispose() {
@@ -31,13 +24,11 @@ class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStat
 
   void onChanged(String text) {
     debouncer.run(() {
-      print("onChanged :$text");
+      context.read<SearchResultCubit>().fetchResultsBy(queryText: text);
     });
   }
 
-  void onSubmitted(String query) {
-    print("Query will be send to the next screen :$query");
-  }
+  void onSubmitted(String query) {}
   
   @override
   Widget get child => Column(

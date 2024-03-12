@@ -15,7 +15,7 @@ class LoadingState extends SearchResultsState {
   LoadingState({required this.loadingText});
 }
 class LoadedState extends SearchResultsState {
-  final List<SearchResultDTO> results;
+  final List<String?> results;
   LoadedState({required this.results});
 }
 class ErrorState extends SearchResultsState {}

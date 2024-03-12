@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:itunessearchbloc/search/models/search_result_dto.dart';
 import '../cubit/search_results_cubit.dart';
 
 class ResultList extends StatelessWidget {
@@ -23,18 +22,18 @@ class ResultList extends StatelessWidget {
                   Text(text),
                 ],
               ),
-              LoadedState(results: List<SearchResultDTO> results) => ListView.builder(
+              LoadedState(results: List<String?> results) => ListView.builder(
                   shrinkWrap: true,
                   itemCount: results.length,
                   itemBuilder: (BuildContext context, int index) {
                     var item = results[index];
-                    return Padding(
+                     return (item == null) ?const SizedBox() :Padding(
                       padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("${item.artistName}"),
+                          Text(item),
                           const Divider(),
                         ],
                       ),
