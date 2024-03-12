@@ -13,7 +13,7 @@ class ResultList extends StatelessWidget {
         child: BlocBuilder<SearchResultCubit, SearchResultsState>(
           builder: (context, state) {
             return switch (state) {
-              InitialState() => const Text("Initial State is here"),
+              InitialState() => const Text("Search albums,songs,artists"),
               LoadingState(loadingText: String text) => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,22 +29,14 @@ class ResultList extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     var item = results[index];
                     return Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 8.0, bottom: 8.0),
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Artist: ${item.artistName}"),
-                              const SizedBox(height: 4),
-                              Text("Collection: ${item.collectionName}"),
-                              const SizedBox(height: 4),
-                              Text("Track: ${item.trackName}"),
-                            ],
-                          ),
-                        ),
+                      padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("${item.artistName}"),
+                          const Divider(),
+                        ],
                       ),
                     );
                   }),
