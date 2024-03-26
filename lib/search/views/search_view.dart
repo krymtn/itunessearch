@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:itunessearchbloc/base_widget.dart';
-import 'package:itunessearchbloc/search/views/result_list.dart';
 import '../../debouncer.dart';
-import '../cubit/search_results_cubit.dart';
+import '../../suggestion/suggestion.dart';
 
 class SearchView extends BaseStatefulWidget {
   const SearchView({super.key});
@@ -12,7 +11,7 @@ class SearchView extends BaseStatefulWidget {
   State<SearchView> createState() => _SearchViewState();
 }
 
-class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStatefulWidgetMixin{
+class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStatefulWidgetMixin {
   final TextEditingController controller = TextEditingController();
   final debouncer = Debouncer(milliseconds: 500);
 
@@ -24,7 +23,7 @@ class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStat
 
   void onChanged(String text) {
     debouncer.run(() {
-      context.read<SearchResultCubit>().fetchResultsBy(queryText: text);
+      context.read<SuggestionCubit>().retrieveSuggestionsFor(queryText: text);
     });
   }
 
@@ -39,7 +38,7 @@ class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStat
           controller: controller,
           leading: const Icon(Icons.search_rounded),
           side: const MaterialStatePropertyAll(BorderSide(style: BorderStyle.none)),
-          trailing: [(controller.text.isNotEmpty) ?Icon(Icons.cancel_outlined) :SizedBox()],
+          // trailing: [(controller.text.isNotEmpty) ?Icon(Icons.cancel_outlined) :SizedBox()],
           hintText: "Search...",
           elevation: const MaterialStatePropertyAll(0.0),
           backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
@@ -48,7 +47,25 @@ class _SearchViewState extends BaseStatefulWidgetState<SearchView> with BaseStat
           onSubmitted: onSubmitted,
         ),
       ),
-      const Expanded(child: ResultList()),
+      Expanded(
+          child: BlocBuilder<SuggestionCubit, SuggestionState>(
+            builder: (context, state) {
+              return switch (state) {
+                InitialState() => const Text("Search albums,songs,artists"),
+                LoadingState(loadingText: String text) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator.adaptive(),
+                    const SizedBox(height: 16),
+                    Text(text),
+                  ],
+                ),
+                LoadedState(results: List<SuggestionDTO> results) => SuggestionList(suggestions: results),
+                ErrorState() => Container(),
+              };
+            })
+      ),
     ],
   );
 }

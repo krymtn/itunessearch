@@ -14,3 +14,15 @@ class ItunesSearchAPIResponseData {
     results = dataList.map((data) => Result.fromJson(data)).toList();
   }
 }
+
+class ItunesSearchAPIResponse {
+  late int resultCount;
+  late List<dynamic> results;
+  ItunesSearchAPIResponse({required this.resultCount, required this.results});
+
+  ItunesSearchAPIResponse.initDioResponse({required dio.Response response}) {
+    var responseData = jsonDecode(response.data);
+    resultCount = responseData["resultCount"];
+    results = responseData["results"];
+  }
+}

@@ -17,4 +17,7 @@ class SearchRepository extends BaseService {
     //return await client.get("/search?term=$searchQuery&limit=20");
   }
 
+
+
+
 }

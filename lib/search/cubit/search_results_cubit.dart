@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:itunessearchbloc/api_layer/itunes_search_api_response.dart';
-import '../../base_result_dto.dart';
 import '../search_repository.dart';
 part 'search_results_state.dart';
 
@@ -17,7 +16,6 @@ class SearchResultCubit extends Cubit<SearchResultsState> {
         ItunesSearchAPIResponseData responseData = response.data;
         return responseData.results.map((e) => e.searchValue).toList();
       }).toSet().toList();
-
       emit(LoadedState(results: results));
     } catch (error) {
       emit(ErrorState());
