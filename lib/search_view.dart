@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:itunessearchbloc/base_widget.dart';
-import '../../debouncer.dart';
-import '../../suggestion/suggestion.dart';
+import 'debouncer.dart';
+import 'suggestion/suggestion.dart';
 
 class SearchView extends BaseStatefulWidget {
   const SearchView({super.key});

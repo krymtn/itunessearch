@@ -1,10 +1,7 @@
-import '../../base_result_dto.dart';
+import 'result_dto.dart';
 
-class Artist extends Result {
+class Artist extends ResultDTO {
   Artist({required super.artistId, required super.artistName, required super.wrapperType});
-
-  @override
-  String? get searchValue => artistName;
 
   factory Artist.fromJson(Map<String, dynamic> data) {
     return Artist(

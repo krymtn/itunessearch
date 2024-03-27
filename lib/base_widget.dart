@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 abstract class BaseStatelessWidget extends StatelessWidget {
-  final Widget? appBarTitle;
+  Widget? get appBarTitle => null;
   Widget get child;
-  const BaseStatelessWidget({super.key, this.appBarTitle});
+  const BaseStatelessWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (appBarTitle == null) ?null :AppBar(title: appBarTitle),
+      appBar: (appBarTitle == null) ?null :AppBar(title: appBarTitle, backgroundColor: Colors.grey.shade200),
       body: SafeArea(child: child),
     );
   }

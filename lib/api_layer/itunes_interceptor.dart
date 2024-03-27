@@ -1,6 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'itunes_search_api_response.dart';
+import 'api_layer.dart';
 
 class ItunesInterceptor implements Interceptor {
   @override

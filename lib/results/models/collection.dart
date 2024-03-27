@@ -1,6 +1,6 @@
-import '../../base_result_dto.dart';
+import 'result_dto.dart';
 
-class Collection extends Result {
+class Collection extends ResultDTO {
   final String? collectionName;
   final String? artworkUrl60;
   Collection({
@@ -9,9 +9,6 @@ class Collection extends Result {
     required super.artistId,
     required super.artistName,
     required super.wrapperType});
-
-  @override
-  String? get searchValue => collectionName;
 
   factory Collection.fromJson(Map<String, dynamic> data) {
     return Collection(

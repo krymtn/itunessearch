@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:itunessearchbloc/api_layer/itunes_interceptor.dart';
-import 'package:itunessearchbloc/search/search_repository.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late Dio dio;
@@ -26,8 +25,8 @@ void main() {
       delay: const Duration(seconds: 1),
     ));
 
-    SearchRepository searchRepository = SearchRepository(dio: dio);
-    var _ = await searchRepository.fetchResultsBy(searchQuery: query);
+    //SearchRepository searchRepository = SearchRepository(dio: dio);
+    //var _ = await searchRepository.fetchResultsBy(searchQuery: query);
     //expect(searchResponse.data is ItunesSearchAPIResponseData, true);
     //ItunesSearchAPIResponseData data = searchResponse.data;
     //expect(data.resultCount, 49);

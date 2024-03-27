@@ -1,14 +1,9 @@
-import 'search/models/artist.dart';
-import 'search/models/collection.dart';
-import 'search/models/song.dart';
+import 'artist.dart';
+import 'collection.dart';
+import 'song.dart';
+import 'result.dart';
 
-abstract class BaseResult {
-  String get wrapperType;
-  int get artistId;
-  String? get artistName;
-}
-
-class Result implements BaseResult {
+class ResultDTO implements Result {
   @override
   final String wrapperType;
   @override
@@ -16,11 +11,9 @@ class Result implements BaseResult {
   @override
   final String? artistName;
 
-  String? get searchValue => null;
+  ResultDTO({required this.artistId, required this.artistName, required this.wrapperType});
 
-  Result({required this.artistId, required this.artistName, required this.wrapperType});
-
-  factory Result.fromJson(Map<String, dynamic> data) {
+  factory ResultDTO.fromJson(Map<String, dynamic> data) {
     String wrapperType = data["wrapperType"];
     switch(wrapperType) {
       case "artist":
@@ -30,7 +23,7 @@ class Result implements BaseResult {
       case "collection":
         return Collection.fromJson(data);
       default:
-        return Result(
+        return ResultDTO(
             wrapperType: data["wrapperType"],
             artistId: data["artistId"],
             artistName: data["artistName"]
