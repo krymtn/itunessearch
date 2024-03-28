@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-abstract class BaseStatelessWidget extends StatelessWidget {
-  Widget? get appBarTitle => null;
-  Widget get child;
-  const BaseStatelessWidget({super.key});
+class BaseScreen extends StatelessWidget {
+  final LayoutWidgetBuilder builder;
+  final AppBar? appBar;
+  const BaseScreen({super.key, required this.builder, this.appBar});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (appBarTitle == null) ?null :AppBar(title: appBarTitle, backgroundColor: Colors.grey.shade200),
-      body: SafeArea(child: child),
+      appBar: appBar,
+      body: LayoutBuilder(
+        builder: (context, constraint) {
+          return SafeArea(
+              child: builder(context, constraint)
+          );
+        },
+      ),
     );
   }
 }
@@ -19,21 +25,10 @@ abstract class BaseStatefulWidget extends StatefulWidget {
 }
 
 abstract class BaseStatefulWidgetState<T extends BaseStatefulWidget> extends State<T> {
-  final Widget? appBarTitle;
-  BaseStatefulWidgetState({this.appBarTitle});
-
   Widget get child;
 }
 
-mixin BaseStatefulWidgetMixin<T extends BaseStatefulWidget> on BaseStatefulWidgetState<T> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: (appBarTitle == null) ?null :AppBar(title: appBarTitle),
-      body: SafeArea(child: child),
-    );
-  }
-}
+mixin BaseStatefulWidgetMixin<T extends BaseStatefulWidget> on BaseStatefulWidgetState<T> {}
 
 
 

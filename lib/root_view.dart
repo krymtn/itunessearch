@@ -1,45 +1,77 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:itunessearchbloc/base_widget.dart';
 import 'debouncer.dart';
 import 'suggestion/suggestion.dart';
-import 'base_widget.dart';
 import 'search_view.dart';
 
-
-class RootView extends BaseStatelessWidget {
+class RootView extends StatefulWidget {
   final SuggestionRepository? suggestionRepository;
-  RootView({super.key, this.suggestionRepository});
-  SuggestionRepository get _suggestionRepository => suggestionRepository ?? SuggestionRepository();
+  const RootView({super.key, this.suggestionRepository});
 
-  final TextEditingController controller = TextEditingController();
+  @override
+  State<RootView> createState() => _RootViewState();
+}
+
+class _RootViewState extends State<RootView> {
+  final SearchController searchController = SearchController();
   final debouncer = Debouncer(milliseconds: 500);
+
+  late SuggestionCubit suggestionCubit;
+
+  SuggestionRepository get _suggestionRepository =>
+      widget.suggestionRepository ?? SuggestionRepository();
+
+  @override
+  void initState() {
+    suggestionCubit = SuggestionCubit(_suggestionRepository);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseScreen(builder: (context, constraints) {
+      return MultiBlocProvider(
+          providers: [
+            BlocProvider<SuggestionCubit>(create: (context) => suggestionCubit),
+          ],
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SearchBarView(
+                          searchController: searchController,
+                          onChanged: onChanged,
+                          onSubmitted: onSubmitted,
+                          onCancelPressed: onCancelPressed),
+                    ),
+                    TextButton(onPressed: onCancelPressed, child: const Text("Cancel")),
+                  ],
+                ),
+              ),
+              const Expanded(child: SuggestionPage()),
+            ],
+          ));
+    });
+  }
+
+  void onCancelPressed() {
+    searchController.clear();
+    suggestionCubit.clear();
+  }
 
   void onChanged(String text) {
     debouncer.run(() {
-
+      if (text.length > 3) {
+        suggestionCubit.retrieveSuggestionsFor(queryText: text);
+      } else if (text.isEmpty) {
+        suggestionCubit.clear();
+      }
     });
   }
 
   void onSubmitted(String query) {}
-
-  @override
-  Widget? get appBarTitle => CupertinoSearchTextField(
-    controller: controller,
-    //leading: const Icon(Icons.search_rounded),
-    //side: const MaterialStatePropertyAll(BorderSide(style: BorderStyle.none)),
-    // trailing: [(controller.text.isNotEmpty) ?Icon(Icons.cancel_outlined) :SizedBox()],
-    //hintText: "Search...",
-    //elevation: const MaterialStatePropertyAll(0.0),
-    //backgroundColor: const MaterialStatePropertyAll(Colors.black12),
-    //overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-    onChanged: onChanged,
-    onSubmitted: onSubmitted,
-  );
-
-  @override
-  Widget get child => BlocProvider(
-    create: (context) => SuggestionCubit(_suggestionRepository),
-    child: Container(),
-  );
 }

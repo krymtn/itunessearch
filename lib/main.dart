@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'root_view.dart';
+import 'theme/theme.dart' as app_theme;
 
 void main() {
   runApp(const MyApp());
@@ -8,16 +9,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'iTunes Search',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: RootView(),
+      theme: app_theme.lightTheme,
+      home: const RootView(),
     );
   }
 }

@@ -26,4 +26,8 @@ class SuggestionCubit extends Cubit<SuggestionState> {
       emit(ErrorState());
     }
   }
+
+  clear() {
+    emit(InitialState());
+  }
 }
