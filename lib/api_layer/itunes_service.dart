@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'itunes_interceptor.dart';
+import 'api_layer.dart';
 
 class ITunesService {
   static final ITunesService _instance = ITunesService._internal();
