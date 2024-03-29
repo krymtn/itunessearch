@@ -18,7 +18,7 @@ class SuggestionCubit extends Cubit<SuggestionState> {
       List<SuggestionDTO> results = responses.expand((response) {
         ItunesSearchAPIResponse responseData = response.data;
         return responseData.results.map((data) => SuggestionDTO.fromJson(data));
-      }).toList();
+      }).where((element) => element.suggestionString != null).toList();
       final keys = <dynamic>{};
       results.retainWhere((x) => keys.add(x.suggestionString));
       emit(LoadedState(results: results));

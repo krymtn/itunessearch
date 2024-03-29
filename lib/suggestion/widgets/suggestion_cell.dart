@@ -8,17 +8,7 @@ class SuggestionCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (suggestion.suggestionString == null)
-        ? const SizedBox.shrink()
-        : Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(suggestion.suggestionString!),
-                const Divider(),
-              ],
-            ),
-          );
+        ? const SizedBox()
+        : ListTile(title: Text(suggestion.suggestionString!));
   }
 }

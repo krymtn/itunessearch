@@ -15,7 +15,7 @@ class RootView extends StatefulWidget {
 
 class _RootViewState extends State<RootView> {
   final SearchController searchController = SearchController();
-  final debouncer = Debouncer(milliseconds: 500);
+  final debouncer = Debouncer(milliseconds: 1000);
 
   late SuggestionCubit suggestionCubit;
 
