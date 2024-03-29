@@ -16,10 +16,5 @@ class SuggestionList extends StatelessWidget {
         return const Divider();
       },
     );
-    return ListView.builder(
-        itemCount: suggestions.length,
-        itemBuilder: (BuildContext context, int index) {
-          return SuggestionCell(suggestion: suggestions[index]);
-        });
   }
 }
