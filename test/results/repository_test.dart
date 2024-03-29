@@ -26,7 +26,7 @@ void main() {
 
     setUp(() async {
       String responseString = await rootBundle.loadString(successPath);
-      dioAdapter.onGet("/search?term=$query&entity=$entityValue&limit=15", (server) => server.reply(
+      dioAdapter.onGet("/search", queryParameters: {"term": query, "entity": entityValue, "limit": 15}, (server) => server.reply(
         200,
         responseString,
         delay: const Duration(seconds: 1),
@@ -57,7 +57,7 @@ void main() {
 
     setUp(() async {
       String responseString = await rootBundle.loadString(successPath);
-      dioAdapter.onGet("/search?term=$query&entity=$entityValue&limit=15", (server) => server.reply(
+      dioAdapter.onGet("/search", queryParameters: {"term": query, "entity": entityValue, "limit": 15}, (server) => server.reply(
         200,
         responseString,
         delay: const Duration(seconds: 1),
@@ -87,7 +87,7 @@ void main() {
 
     setUp(() async {
       String responseString = await rootBundle.loadString(successPath);
-      dioAdapter.onGet("/search?term=$query&entity=$entityValue&limit=15", (server) => server.reply(
+      dioAdapter.onGet("/search", queryParameters: {"term": query, "entity": entityValue, "limit": 15}, (server) => server.reply(
         200,
         responseString,
         delay: const Duration(seconds: 1),
