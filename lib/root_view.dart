@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:itunessearchbloc/base_widget.dart';
+import 'base_widget.dart';
 import 'debouncer.dart';
+import 'results/view/view.dart';
 import 'suggestion/suggestion.dart';
 import 'search_view.dart';
 
@@ -52,7 +53,10 @@ class _RootViewState extends State<RootView> {
                   ],
                 ),
               ),
-              const Expanded(child: SuggestionPage()),
+              //const Expanded(child: SuggestionPage()),
+              const Expanded(
+                child: ResultsPage(queryString: "Kuzu kuzu"),
+              )
             ],
           ));
     });

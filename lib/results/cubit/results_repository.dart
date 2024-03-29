@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
-import '../../api_layer/base_service.dart';
-import '../models/models.dart';
+part of 'results_cubit.dart';
 
 class ResultsRepository extends BaseService {
   ResultsRepository({Dio? dio}) : super(dio: dio);

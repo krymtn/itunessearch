@@ -1,6 +1,3 @@
-import 'artist.dart';
-import 'album.dart';
-import 'song.dart';
 import 'result.dart';
 
 class ResultDTO implements Result {

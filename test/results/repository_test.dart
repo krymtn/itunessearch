@@ -3,9 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:itunessearchbloc/api_layer/api_layer.dart';
-import 'package:itunessearchbloc/results/cubit/results_repository.dart';
+import 'package:itunessearchbloc/results/cubit/results_cubit.dart';
 import 'package:itunessearchbloc/results/models/models.dart';
-import 'package:itunessearchbloc/results/models/result.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
