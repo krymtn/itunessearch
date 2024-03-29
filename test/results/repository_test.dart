@@ -48,4 +48,34 @@ void main() {
     });
 
   });
+
+  group("mock/kuzukuzu_albums.json results", () {
+    String successPath = "test/assets/results/kuzukuzu_albums.json";
+    const query = "kuzu+kuzu";
+    const entity = "album";
+    late dio_client.Response songResponse;
+
+    setUp(() async {
+      String responseString = await rootBundle.loadString(successPath);
+      dioAdapter.onGet("/search?term=$query&entity=$entity&limit=15", (server) => server.reply(
+        200,
+        responseString,
+        delay: const Duration(seconds: 1),
+      ));
+      ResultsRepository repository = ResultsRepository(dio: dio);
+      songResponse = await repository.fetchOverviewSearchItemsBy(entity: Entities.album, queryText: query);
+    });
+
+    test("1. Check the pure response data", () {
+      expect(songResponse.data is ItunesSearchAPIResponse, true);
+      ItunesSearchAPIResponse itunesSearchAPIResponse = songResponse.data;
+      expect(itunesSearchAPIResponse.resultCount, 15);
+    });
+
+    test("2. album constructor with json", () {
+      ItunesSearchAPIResponse itunesSearchAPIResponse = songResponse.data;
+      List<Album> songs = itunesSearchAPIResponse.results.map((e) => Album.fromJson(e)).toList();
+      expect(songs.first.collectionName, "Kuzu Kuzu (Remixes) - EP");
+    });
+  });
 }

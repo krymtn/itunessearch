@@ -1,5 +1,5 @@
 import 'artist.dart';
-import 'collection.dart';
+import 'album.dart';
 import 'song.dart';
 import 'result.dart';
 
