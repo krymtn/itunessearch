@@ -74,7 +74,7 @@ void main() {
     test("2. album constructor with json", () {
       ItunesSearchAPIResponse itunesSearchAPIResponse = albumResponse.data;
       List<Album> songs = itunesSearchAPIResponse.results.map((e) => Album.fromJson(e)).toList();
-      expect(songs.first.collectionName, "Kuzu Kuzu (Remixes) - EP");
+      expect(songs.first.trackName, "Kuzu Kuzu (Remixes) - EP");
     });
   });
 

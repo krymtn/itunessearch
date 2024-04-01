@@ -2,13 +2,20 @@ import 'result.dart';
 
 class ResultDTO implements Result {
   @override
-  final String wrapperType;
+  String? wrapperType;
   @override
-  final int artistId;
+  int? artistId;
   @override
-  final String? artistName;
+  String? artistName;
 
-  ResultDTO({required this.artistId, required this.artistName, required this.wrapperType});
+  @override
+  String? artworkUrl100;
+  @override
+  double? price;
+  @override
+  String? trackName;
+
+  ResultDTO({this.artistId, this.artistName, this.wrapperType, this.artworkUrl100, this.price, this.trackName});
 
   factory ResultDTO.fromJson(Map<String, dynamic> data) {
     return ResultDTO(
