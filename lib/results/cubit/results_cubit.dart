@@ -11,6 +11,10 @@ class ResultsCubit extends Cubit<ResultState> {
 
   ResultsCubit(this.repository) : super(InitialState());
 
+  getTheResults({required String query}){
+    emit(GetResultsState(suggestionText: query));
+  }
+
   prepareSection({required Entities entity, required String queryText}) async {
     emit(LoadingState(loadingText: "Retrieve the results..."));
     try {

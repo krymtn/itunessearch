@@ -27,6 +27,10 @@ class SuggestionCubit extends Cubit<SuggestionState> {
     }
   }
 
+  clickSuggestion(SuggestionDTO suggestionDTO) {
+    emit(ClickSuggestionState(suggestion: suggestionDTO));
+  }
+
   clear() {
     emit(InitialState());
   }

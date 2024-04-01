@@ -17,8 +17,8 @@ class VideoCell extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.network(musicVideo.artworkUrl100.toString(), fit: BoxFit.fitWidth),
-          Text(musicVideo.trackName.toString()),
-          Text(musicVideo.artistName.toString())
+          Text(musicVideo.trackName.toString(), maxLines: 2, overflow: TextOverflow.ellipsis),
+          Text(musicVideo.artistName.toString(), maxLines: 1, style: const TextStyle(fontWeight: FontWeight.w700))
         ],
       ),
     );

@@ -39,6 +39,7 @@ class ResultsPage extends StatelessWidget {
                       }, itemCount: albums.length),
                   ErrorState() => Container(),
                   LoadedState<ResultDTO>() => const SizedBox(),
+                  GetResultsState() => const SizedBox(),
                 };
               }
             )
@@ -65,6 +66,7 @@ class ResultsPage extends StatelessWidget {
                         }, itemCount: videos.length),
                     ErrorState() => Container(),
                     LoadedState<ResultDTO>() => const SizedBox(),
+                    GetResultsState() => const SizedBox(),
                   };
                 }
             )
@@ -73,18 +75,3 @@ class ResultsPage extends StatelessWidget {
     );
   }
 }
-/*
-* ResultSection(
-              title: "Albums",
-              sectionBuilder: (context , index) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.red,
-                    ),
-                  ],
-                );
-              }, itemCount: 15)*/

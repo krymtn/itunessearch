@@ -12,3 +12,8 @@ class LoadedState<T extends ResultDTO> extends ResultState {
   LoadedState({required this.items});
 }
 class ErrorState extends ResultState {}
+
+class GetResultsState extends ResultState {
+  final String suggestionText;
+  GetResultsState({required this.suggestionText});
+}
