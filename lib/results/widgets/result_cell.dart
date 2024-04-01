@@ -5,6 +5,21 @@ abstract class ResultCell<T extends ResultDTO> extends StatelessWidget {
   final T item;
   const ResultCell({super.key, required this.item});
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(
+          maxWidth: 100
+      ),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [image, track, artist]
+      ),
+    );
+  }
+
   Image get image => Image.network(item.artworkUrl100.toString(), fit: BoxFit.fitWidth);
   Text get track => Text(item.trackName.toString(), maxLines: 2, overflow: TextOverflow.ellipsis);
   Text get artist => Text(item.artistName.toString(), maxLines: 1, style: const TextStyle(fontWeight: FontWeight.w700));
