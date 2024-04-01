@@ -44,9 +44,11 @@ class _SuggestionPageState extends State<SuggestionPage> {
                       Text(text),
                     ],
                   ),
-                  LoadedState(results: List<SuggestionDTO> results) =>
-                      SuggestionList(suggestions: results),
+                  LoadedState(results: List<SuggestionDTO> results) => SuggestionList(didSelect: (suggestion) {
+                    context.read<SuggestionCubit>().clickSuggestion(suggestion);
+                  }, suggestions: results),
                   ErrorState() => Container(),
+                  ClickSuggestionState() => Container(),
                 };
               })
         ],

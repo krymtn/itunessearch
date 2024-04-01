@@ -12,3 +12,9 @@ class LoadedState extends SuggestionState {
   LoadedState({required this.results});
 }
 class ErrorState extends SuggestionState {}
+
+class ClickSuggestionState extends SuggestionState {
+  final SuggestionDTO suggestion;
+  ClickSuggestionState({required this.suggestion});
+}
+
