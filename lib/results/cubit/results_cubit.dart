@@ -21,14 +21,15 @@ class ResultsCubit extends Cubit<ResultState> {
       Response response = await repository.fetchOverviewSearchItemsBy(entity: entity, queryText: queryText);
       ItunesSearchAPIResponse responseData = response.data;
       switch(entity) {
-        case Entities.song:
-          break;
         case Entities.album:
           List<Album> albums = responseData.results.map((albumData) => Album.fromJson(albumData)).toList();
           emit(LoadedState<Album>(items: albums));
         case Entities.musicVideo:
           List<MusicVideo> videos = responseData.results.map((musicVideoData) => MusicVideo.fromJson(musicVideoData)).toList();
           emit(LoadedState<MusicVideo>(items: videos));
+        case Entities.song:
+          List<Song> songs = responseData.results.map((songData) => Song.fromJson(songData)).toList();
+          emit(LoadedState<Song>(items: songs));
       }
     } catch (error) {
       emit(ErrorState());

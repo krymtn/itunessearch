@@ -15,7 +15,7 @@ class ResultSection<T extends ResultDTO> extends StatelessWidget {
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(title), TextButton(onPressed: () {}, child: const Text("See all"))]),
         Container(
           constraints: const BoxConstraints(
-              minHeight: 100, maxHeight: 170),
+              minHeight: 100, maxHeight: 200),
           child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: itemCount ?? 0,

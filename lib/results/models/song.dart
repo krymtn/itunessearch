@@ -2,18 +2,16 @@ import 'result_dto.dart';
 
 class Song extends ResultDTO {
   final int trackId;
-  final String? trackName;
   final int collectionId;
   final String? collectionName;
-  final String? artworkUrl100;
-  final double? trackPrice;
+
   Song({
     required this.trackId,
-    required this.trackName,
     required this.collectionId,
     this.collectionName,
-    this.artworkUrl100,
-    this.trackPrice,
+    super.trackName,
+    super.price,
+    super.artworkUrl100,
     required super.artistId,
     required super.artistName,
     required super.wrapperType});
@@ -28,7 +26,7 @@ class Song extends ResultDTO {
         collectionId: data["collectionId"],
         collectionName: data["collectionName"],
         artworkUrl100: data["artworkUrl100"],
-        trackPrice: data["trackPrice"]
+        price: data["trackPrice"]
     );
   }
 }

@@ -58,6 +58,7 @@ class _RootViewState extends State<RootView> {
               ),
               Expanded(
                 child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
                     controller: _pageController,
                     children: [
                       BlocConsumer<SuggestionCubit, SuggestionState>(
@@ -68,6 +69,8 @@ class _RootViewState extends State<RootView> {
                             if (state is ClickSuggestionState) {
                               _pageController.jumpToPage(1);
                               resultsCubit.getTheResults(query: state.suggestion.suggestionString!);
+                            } else {
+                              _pageController.jumpToPage(0);
                             }
                           }
                       ),
@@ -96,6 +99,8 @@ class _RootViewState extends State<RootView> {
   void onChanged(String text) {
     debouncer.run(() {
       if (text.length > 3) {
+        _pageController.jumpToPage(0);
+        suggestionCubit.clear();
         suggestionCubit.retrieveSuggestionsFor(queryText: text);
       } else if (text.isEmpty) {
         suggestionCubit.clear();
